@@ -8,9 +8,16 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+type Pattern struct {
+	UserID       pgtype.UUID
+	ID           pgtype.UUID
+	Instructions pgtype.Text
+}
+
 type User struct {
-	ID             int64
-	Name           string
-	Email          string
-	Hashedpassword pgtype.Text
+	ID             pgtype.UUID
+	Username       pgtype.Text
+	Email          pgtype.Text
+	HashedPassword pgtype.Text
+	Salt           pgtype.Text
 }

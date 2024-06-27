@@ -6,7 +6,7 @@ cloud:
 sql: 
   - engine: "postgresql"
     queries: "./sql/query/"
-    schema: "./sql/schema/"
+    schema: "./sql/migrations/"
     gen:
       go:
         package: "db"
