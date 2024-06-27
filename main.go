@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 
-	"github.com/misterpuffin/go-rest-api-boilerplate/internal/config"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/http"
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/util"
 )
 
 func main() {
@@ -16,6 +17,11 @@ func main() {
 		os.Exit(1)
 	}
 	flag.Parse()
-	config.Init(*env)
+
+	config, err := util.LoadConfig(*env)
+	if err != nil {
+		log.Fatalf("Failed to load config in %s", env)
+	}
+
 	http.Run()
 }
