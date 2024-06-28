@@ -5,19 +5,19 @@
 package db
 
 import (
-	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/google/uuid"
 )
 
 type Pattern struct {
-	UserID       pgtype.UUID
-	ID           pgtype.UUID
-	Instructions pgtype.Text
+	UserID       uuid.UUID
+	ID           uuid.UUID
+	Instructions *string
 }
 
 type User struct {
-	ID             pgtype.UUID
-	Username       pgtype.Text
-	Email          pgtype.Text
-	HashedPassword pgtype.Text
-	Salt           pgtype.Text
+	ID             uuid.UUID
+	Username       string
+	Email          string
+	HashedPassword string
+	Salt           *string
 }

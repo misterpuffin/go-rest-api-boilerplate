@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func Run() {
+func RunServer() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 
