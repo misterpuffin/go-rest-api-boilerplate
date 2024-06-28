@@ -11,14 +11,15 @@ var config *viper.Viper
 
 type Config struct {
 	Server struct {
-		Port uint
+		Port string
 		Host string
 	}
 	Postgres struct {
 		Host     string
-		Port     uint
+		Port     string
 		Username string
 		Password string
+		DBName   string
 		Pool     struct {
 			Max uint
 		}

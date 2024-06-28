@@ -6,5 +6,6 @@ postgres:
   port: 5432
   username: username
   password: password
+  dbname: kroshy
   pool:
     max: 50

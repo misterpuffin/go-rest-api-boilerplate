@@ -23,5 +23,6 @@ func main() {
 		log.Fatalf("Failed to load config in %s", env)
 	}
 
-	http.Run()
+	http.RunServer(config)
+
 }

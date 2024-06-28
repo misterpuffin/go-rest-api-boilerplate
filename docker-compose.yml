@@ -6,8 +6,8 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=user
+      - POSTGRES_USER=username
       - POSTGRES_DB=kroshy
