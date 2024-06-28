@@ -1,5 +1,5 @@
--- +goose StatementBegin
 -- +goose Up
+-- +goose StatementBegin
 SELECT 'up SQL query';
 CREATE TABLE "patterns" (
   "user_id" uuid NOT NULL,
