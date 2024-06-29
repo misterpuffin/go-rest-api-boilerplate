@@ -1,6 +1,17 @@
 NAME=go-rest-api-boilerplate
 VERSION=0.0.1
 
+.PHONY: migrate_up
+migrate_up: 
+	cd sql/migrations; \
+	GOOSE_DRIVER=postgres GOOSE_DBSTRING=postgres://username:password@localhost:5432/kroshy goose up
+	
+.PHONY: migrate_down
+migrate_down: 
+	cd sql/migrations; \
+	GOOSE_DRIVER=postgres GOOSE_DBSTRING=postgres://username:password@localhost:5432/kroshy goose down
+
+
 .PHONY: build
 build:
 	@echo Building from source....

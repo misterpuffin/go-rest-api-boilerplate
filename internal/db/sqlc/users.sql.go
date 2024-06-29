@@ -9,6 +9,40 @@ import (
 	"context"
 )
 
+const createUser = `-- name: CreateUser :one
+INSERT INTO users (
+  username, email, hashed_password, salt
+) VALUES (
+  $1, $2, $3, $4
+)
+RETURNING id, username, email, hashed_password, salt
+`
+
+type CreateUserParams struct {
+	Username       string
+	Email          string
+	HashedPassword string
+	Salt           string
+}
+
+func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
+	row := q.db.QueryRow(ctx, createUser,
+		arg.Username,
+		arg.Email,
+		arg.HashedPassword,
+		arg.Salt,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.HashedPassword,
+		&i.Salt,
+	)
+	return i, err
+}
+
 const getUserByEmail = `-- name: GetUserByEmail :one
 SELECT id, username, email, hashed_password, salt FROM users
 WHERE email = $1 LIMIT 1

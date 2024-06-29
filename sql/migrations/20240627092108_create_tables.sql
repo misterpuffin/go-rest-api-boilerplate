@@ -10,9 +10,9 @@ CREATE TABLE "patterns" (
 CREATE TABLE "users" (
   "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   "username" VARCHAR(50) NOT NULL,
-  "email" VARCHAR(150) UNIQUE NOT NULL CHECK (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$'),
+  "email" VARCHAR(150) UNIQUE NOT NULL,
   "hashed_password" VARCHAR(1024) NOT NULL,
-  "salt" varchar
+  "salt" varchar NOT NULL
 );
 
 ALTER TABLE "patterns" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");

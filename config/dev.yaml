@@ -9,3 +9,4 @@ postgres:
   dbname: kroshy
   pool:
     max: 50
+secret_key: 'secret_sauce'

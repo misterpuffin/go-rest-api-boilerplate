@@ -24,6 +24,7 @@ type Config struct {
 			Max uint
 		}
 	}
+	SecretKey string
 }
 
 func LoadConfig(env string) (config Config, err error) {

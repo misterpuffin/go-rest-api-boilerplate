@@ -37,7 +37,9 @@ func RunServer(config util.Config) {
 	{
 		userService := users.NewService(config, q)
 		authController := controllers.NewAuthController(userService)
+
 		auth.POST("/register", authController.Register)
+		auth.POST("/login", authController.Login)
 	}
 
 	r.Run()

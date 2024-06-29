@@ -7,5 +7,6 @@ import (
 )
 
 type Repository interface {
-	GetUserByEmail(ctx context.Context, email string) (db.User, error)
+	GetUserByEmail(context.Context, string) (db.User, error)
+	CreateUser(context.Context, db.CreateUserParams) (db.User, error)
 }
