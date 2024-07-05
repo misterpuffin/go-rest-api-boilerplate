@@ -7,7 +7,30 @@ package db
 
 import (
 	"context"
+
+	"github.com/google/uuid"
 )
+
+const createPattern = `-- name: CreatePattern :one
+INSERT INTO patterns (
+  user_id, instructions
+) VALUES (
+  $1, $2
+)
+RETURNING user_id, id, instructions
+`
+
+type CreatePatternParams struct {
+	UserID       uuid.UUID
+	Instructions *string
+}
+
+func (q *Queries) CreatePattern(ctx context.Context, arg CreatePatternParams) (Pattern, error) {
+	row := q.db.QueryRow(ctx, createPattern, arg.UserID, arg.Instructions)
+	var i Pattern
+	err := row.Scan(&i.UserID, &i.ID, &i.Instructions)
+	return i, err
+}
 
 const createUser = `-- name: CreateUser :one
 INSERT INTO users (
@@ -40,6 +63,18 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.HashedPassword,
 		&i.Salt,
 	)
+	return i, err
+}
+
+const getPatternById = `-- name: GetPatternById :one
+SELECT user_id, id, instructions FROM patterns
+WHERE id = $1 LIMIT 1
+`
+
+func (q *Queries) GetPatternById(ctx context.Context, id uuid.UUID) (Pattern, error) {
+	row := q.db.QueryRow(ctx, getPatternById, id)
+	var i Pattern
+	err := row.Scan(&i.UserID, &i.ID, &i.Instructions)
 	return i, err
 }
 
