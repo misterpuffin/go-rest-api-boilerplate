@@ -56,18 +56,6 @@ func (s Service) LoginUser(email string, password string) (token string, err err
 		return "", util.BadRequest("Incorrect Password")
 	}
 
-	tokenGenerator := jwt.NewWithClaims(jwt.SigningMethodHS512,
-		jwt.MapClaims{
-			"userId": user.ID,
-		})
-
-	signingKey, err := base64.StdEncoding.DecodeString(s.config.SecretKey)
-	if err != nil {
-		return "", err
-	}
-	token, err = tokenGenerator.SignedString(signingKey)
-	if err != nil {
-		return "", err
-	}
+	token, err = util.CreateJWTToken(util.JWTTokenPayload{UserId: user.ID.String()}, s.config)
 	return token, nil
 }

@@ -25,6 +25,9 @@ type Config struct {
 		}
 	}
 	SecretKey string
+	JWT       struct {
+		HoursToExpire int
+	}
 }
 
 func LoadConfig(env string) (config Config, err error) {
