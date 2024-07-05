@@ -4,6 +4,8 @@ go 1.22
 
 require github.com/jackc/pgx/v5 v5.6.0
 
+require github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+
 require (
 	github.com/bytedance/sonic v1.11.9 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect

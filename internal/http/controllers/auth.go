@@ -28,7 +28,7 @@ type LoginRequestBody struct {
 }
 type LoginResponse struct {
 	Message string
-	User    db.User
+	Token   string
 }
 
 func NewAuthController(userService *users.Service) *AuthController {
@@ -60,11 +60,11 @@ func (ctrl AuthController) Login(c *gin.Context) {
 		return
 	}
 
-	user, err := ctrl.svc.LoginUser(requestBody.Email, requestBody.Password)
+	token, err := ctrl.svc.LoginUser(requestBody.Email, requestBody.Password)
 	if err != nil {
 		c.Error(err)
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, LoginResponse{Message: "Successfully logged in", User: user})
+	c.IndentedJSON(http.StatusOK, LoginResponse{Message: "Successfully logged in", Token: token})
 }
