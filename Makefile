@@ -38,5 +38,5 @@ clean:
 	@rm -f ./build/$(NAME)
 
 .PHONY: test
-	@go test -v ./tests/*
+	@go test -v ./internal/tests/*
 test:
