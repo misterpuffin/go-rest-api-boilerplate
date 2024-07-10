@@ -28,12 +28,17 @@ func ErrorHandler(c *gin.Context) {
 func AuthHandler(config util.Config) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
-		// TODO: Better error handling
-		jwtTokenString := strings.Split(authHeader, " ")[1]
+		jwtTokens := strings.Split(authHeader, " ")
+		if len(jwtTokens) < 2 {
+			c.Error(errors.New("Unauthorized"))
+			return
+		}
+		jwtTokenString := jwtTokens[1]
 
 		token, err := util.ParseJWTToken(jwtTokenString, config)
 		if err != nil {
 			c.Error(errors.New("Unauthorized"))
+			return
 		}
 
 		c.Set("User", token)
