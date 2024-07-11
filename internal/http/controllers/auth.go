@@ -39,13 +39,13 @@ func (ctrl AuthController) Register(c *gin.Context) {
 	var requestBody RegisterRequestBody
 
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
-		c.Error(errors.BadRequest(err.Error()))
+		_ = c.Error(errors.BadRequest(err.Error())) // ignore error since we handle it
 		return
 	}
 
 	user, err := ctrl.svc.RegisterUser(requestBody.Username, requestBody.Email, requestBody.Password)
 	if err != nil {
-		c.Error(err)
+		_ = c.Error(err) // ignore error since we handle it
 		return
 	}
 
@@ -56,13 +56,13 @@ func (ctrl AuthController) Login(c *gin.Context) {
 	var requestBody LoginRequestBody
 
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
-		c.Error(errors.BadRequest(err.Error()))
+		_ = c.Error(errors.BadRequest(err.Error())) // ignore error since we handle it
 		return
 	}
 
 	token, err := ctrl.svc.LoginUser(requestBody.Email, requestBody.Password)
 	if err != nil {
-		c.Error(err)
+		_ = c.Error(err) // ignore error since we handle it
 		return
 	}
 

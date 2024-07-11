@@ -37,5 +37,5 @@ func (s Service) GetPattern(patternId string) (pattern db.Pattern, err error) {
 func (s Service) CreatePattern(userId uuid.UUID, instructions string) (pattern db.Pattern, err error) {
 	ctx := context.Background()
 	pattern, err = s.repository.CreatePattern(ctx, db.CreatePatternParams{UserID: userId, Instructions: &instructions})
-	return pattern, nil
+	return pattern, err
 }

@@ -34,17 +34,17 @@ func (ctrl PatternController) Post(c *gin.Context) {
 	var requestBody PostPatternBody
 
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
-		c.Error(errors.BadRequest(err.Error()))
+		_ = c.Error(errors.BadRequest(err.Error())) // ignore error since we handle it
 		return
 	}
 
 	userId, ok := c.Get("UserId")
 	if !ok {
-		errors.Unauthorized()
+		_ = c.Error(errors.Unauthorized()) // ignore error since we handle it
 	}
 	pattern, err := ctrl.svc.CreatePattern(userId.(uuid.UUID), requestBody.Instructions)
 	if err != nil {
-		c.Error(err)
+		_ = c.Error(err) // ignore error since we handle it
 		return
 	}
 
@@ -54,12 +54,12 @@ func (ctrl PatternController) Post(c *gin.Context) {
 func (ctrl PatternController) Get(c *gin.Context) {
 	id, ok := c.Params.Get("id")
 	if !ok {
-		c.Error(errors.BadRequest("Please enter a pattern id"))
+		_ = c.Error(errors.BadRequest("Please enter a pattern id")) // ignore error since we handle it
 	}
 
 	pattern, err := ctrl.svc.GetPattern(id)
 	if err != nil {
-		c.Error(err)
+		_ = c.Error(err) // ignore error since we handle it
 		return
 	}
 

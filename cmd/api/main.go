@@ -20,7 +20,7 @@ func main() {
 
 	config, err := config.LoadConfig(*env)
 	if err != nil {
-		log.Fatalf("Failed to load config in %s", env)
+		log.Fatalf("Failed to load config in %s", *env)
 	}
 
 	http.RunServer(config)

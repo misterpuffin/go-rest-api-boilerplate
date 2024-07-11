@@ -57,5 +57,5 @@ func (s Service) LoginUser(email string, password string) (token string, err err
 	}
 
 	token, err = util.CreateJWTToken(util.JWTTokenPayload{UserId: user.ID.String()}, s.config)
-	return token, nil
+	return token, err
 }

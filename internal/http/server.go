@@ -55,5 +55,9 @@ func RunServer(config config.Config) {
 		pattern.GET("/", patternController.Get)
 	}
 
-	r.Run()
+	err = r.Run()
+	if err != nil {
+		log.Fatalf("Unable to start server: %v\n", err)
+		os.Exit(1)
+	}
 }

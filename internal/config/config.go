@@ -7,8 +7,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-var config *viper.Viper
-
 type Config struct {
 	Server struct {
 		Port string
