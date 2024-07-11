@@ -70,6 +70,18 @@ A quick look at the top-level files and directories you'll see in this project.
 
 1. **`README.md`**: A text file containing useful reference information about your project.
 
+## 🛢️ Database
+
+### Migrations
+ This project uses `goose` to manage database migrations. Simply add new migrations into the `sql/migrations` folder and run `make migrate_up` or `make migrate_down`.
+ - For more specialised use, please refer to `goose` documentation
+
+### Queries
+This project uses `sqlc` to generate type-safe golang code from SQL. 
+- All queries go into the `sql/queries` folder.
+- Run `sqlc generate` to generate golang code for your SQL queries. All code is generated into the `internal/db/sqlc` folder
+
+
 ## 🎓 Further Changes
 
 There may be further configuration needed as you expand your application.
