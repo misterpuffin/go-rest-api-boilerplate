@@ -1,4 +1,5 @@
 NAME=go-rest-api-boilerplate
+CMD_DIR=cmd/api
 VERSION=0.0.1
 
 .PHONY: migrate_up
@@ -15,17 +16,17 @@ migrate_down:
 .PHONY: build
 build:
 	@echo Building from source....
-	@go build -o ./build/$(NAME)
+	@go build -o ./build/$(NAME) $(CMD_DIR)/main.go
 
 .PHONY: run
 run: build
 	@echo Starting your app using dev configs....
-	@./build/$(NAME) -e dev
+	@./build/$(NAME) -e dev $(CMD_DIR)/main.go
 
 .PHONY: build-prod
 build-prod:
 	@echo Building from source....
-	@CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
+	@CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main $(CMD_DIR)
 
 .PHONY: run-prod
 run-prod:
