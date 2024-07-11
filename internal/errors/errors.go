@@ -1,4 +1,4 @@
-package util
+package errors
 
 import (
 	"fmt"
@@ -17,4 +17,7 @@ func (e HttpError) Error() string {
 
 func BadRequest(message string) HttpError {
 	return HttpError{Message: message, Status: http.StatusBadRequest}
+}
+func Unauthorized() HttpError {
+	return HttpError{Message: "Unauthorized", Status: http.StatusUnauthorized}
 }

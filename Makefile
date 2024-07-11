@@ -15,8 +15,8 @@ migrate_down:
 .PHONY: build
 build:
 	@echo Building from source....
-	@go build -o ./build/$(NAME)
 
+@go build -o ./build/$(NAME)
 .PHONY: run
 run: build
 	@echo Starting your app using dev configs....

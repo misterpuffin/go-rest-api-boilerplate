@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/config"
 )
 
 type JWTTokenPayload struct {
@@ -48,7 +49,7 @@ func HashPassword(password string, salt string) string {
 	return hashedPasswordHex
 }
 
-func CreateJWTToken(payload JWTTokenPayload, config Config) (token string, err error) {
+func CreateJWTToken(payload JWTTokenPayload, config config.Config) (token string, err error) {
 	claims := JWTToken{
 		UserId: payload.UserId,
 		StandardClaims: jwt.StandardClaims{
@@ -69,8 +70,8 @@ func CreateJWTToken(payload JWTTokenPayload, config Config) (token string, err e
 	return token, err
 }
 
-func ParseJWTToken(token string, config Config) (*JWTToken, error) {
-	signingKey, err := base64.StdEncoding.DecodeString(secretKey)
+func ParseJWTToken(token string, config config.Config) (*JWTToken, error) {
+	signingKey, err := base64.StdEncoding.DecodeString(config.SecretKey)
 	if err != nil {
 		return nil, err
 	}

@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/db/sqlc"
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/errors"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/users"
-	"github.com/misterpuffin/go-rest-api-boilerplate/internal/util"
 )
 
 type AuthController struct {
@@ -39,7 +39,7 @@ func (ctrl AuthController) Register(c *gin.Context) {
 	var requestBody RegisterRequestBody
 
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
-		c.Error(util.BadRequest(err.Error()))
+		c.Error(errors.BadRequest(err.Error()))
 		return
 	}
 
@@ -56,7 +56,7 @@ func (ctrl AuthController) Login(c *gin.Context) {
 	var requestBody LoginRequestBody
 
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
-		c.Error(util.BadRequest(err.Error()))
+		c.Error(errors.BadRequest(err.Error()))
 		return
 	}
 

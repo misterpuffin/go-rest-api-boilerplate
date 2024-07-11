@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/config"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/http"
-	"github.com/misterpuffin/go-rest-api-boilerplate/internal/util"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	}
 	flag.Parse()
 
-	config, err := util.LoadConfig(*env)
+	config, err := config.LoadConfig(*env)
 	if err != nil {
 		log.Fatalf("Failed to load config in %s", env)
 	}

@@ -2,20 +2,20 @@ package users
 
 import (
 	"context"
-	"encoding/base64"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5"
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/config"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/db/sqlc"
+	"github.com/misterpuffin/go-rest-api-boilerplate/internal/errors"
 	"github.com/misterpuffin/go-rest-api-boilerplate/internal/util"
 )
 
 type Service struct {
-	config     util.Config
+	config     config.Config
 	repository Repository
 }
 
-func NewService(config util.Config, repository Repository) *Service {
+func NewService(config config.Config, repository Repository) *Service {
 	return &Service{config, repository}
 }
 
@@ -27,7 +27,7 @@ func (s Service) RegisterUser(username string, email string, password string) (u
 		if err != nil {
 			return
 		}
-		return user, util.BadRequest("Email already registered")
+		return user, errors.BadRequest("Email already registered")
 	}
 
 	const saltSize = 16
@@ -44,7 +44,7 @@ func (s Service) LoginUser(email string, password string) (token string, err err
 
 	if err != nil {
 		if err == pgx.ErrNoRows {
-			return "", util.BadRequest("Email has not been registered")
+			return "", errors.BadRequest("Email has not been registered")
 		}
 		return
 	}
@@ -53,7 +53,7 @@ func (s Service) LoginUser(email string, password string) (token string, err err
 	checkHashedPassword := util.HashPassword(password, salt)
 
 	if checkHashedPassword != user.HashedPassword {
-		return "", util.BadRequest("Incorrect Password")
+		return "", errors.BadRequest("Incorrect Password")
 	}
 
 	token, err = util.CreateJWTToken(util.JWTTokenPayload{UserId: user.ID.String()}, s.config)
