@@ -15,8 +15,8 @@ migrate_down:
 .PHONY: build
 build:
 	@echo Building from source....
+	@go build -o ./build/$(NAME)
 
-@go build -o ./build/$(NAME)
 .PHONY: run
 run: build
 	@echo Starting your app using dev configs....
@@ -38,5 +38,9 @@ clean:
 	@rm -f ./build/$(NAME)
 
 .PHONY: test
-	@go test -v ./internal/tests/*
 test:
+	@go test -v ./internal/tests/*
+
+.PHONY: lint
+lint:
+	@golangci-lint run
