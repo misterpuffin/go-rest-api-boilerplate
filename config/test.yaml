@@ -1,0 +1,14 @@
+server:
+  host: localhost
+  port: 8080
+postgres:
+  host: localhost
+  port: 5432
+  username: username
+  password: password
+  dbname: kroshy
+  pool:
+    max: 50
+secret_key: 'c2VjcmV0X3NhdWNl'
+jwt:
+  hours_to_expire: 12

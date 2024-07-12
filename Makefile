@@ -40,7 +40,7 @@ clean:
 
 .PHONY: test
 test:
-	@go test -v ./internal/tests/*
+	@go test -v ./...
 
 .PHONY: lint
 lint:

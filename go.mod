@@ -4,7 +4,11 @@ go 1.22
 
 require github.com/jackc/pgx/v5 v5.6.0
 
-require github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+require (
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
+)
 
 require (
 	github.com/bytedance/sonic v1.11.9 // indirect
@@ -43,6 +47,7 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
+	github.com/stretchr/testify v1.9.0
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
