@@ -26,7 +26,7 @@ run: build
 .PHONY: build-prod
 build-prod:
 	@echo Building from source....
-	@CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main $(CMD_DIR)
+	@CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o ./build/$(NAME) $(CMD_DIR)/main.go
 
 .PHONY: run-prod
 run-prod:
