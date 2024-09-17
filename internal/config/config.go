@@ -23,10 +23,10 @@ type Config struct {
 			Max uint
 		}
 	}
-	SecretKey string
+	SecretKey string `mapstructure:"secret_key"`
 	JWT       struct {
-		HoursToExpire int
-	}
+		HoursToExpire int `mapstructure:"hours_to_expire"`
+	} `mapstructure:"jwt"`
 }
 
 func LoadConfig(env string) (config Config, err error) {
